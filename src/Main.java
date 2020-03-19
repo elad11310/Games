@@ -6,8 +6,12 @@ this project represents the childhood game MineSweeper , including option to cho
 public class Main {
     public static void main(String[] args) {
 
-        GameWindow game = new GameWindow(15);
-        game.setVisible(true);
+       // MsGame game = new MsGame(10);
+        //game.setVisible(true);
+       GameChoose g = new GameChoose();
+       g.setVisible(true);
+       //HmGame hmGame = new HmGame(Level.EASY);
+        //hmGame.setVisible(true);
 
-   }
+    }
 }
