@@ -1,10 +1,12 @@
 import javax.swing.*;
+import javax.swing.event.MouseInputAdapter;
 import java.awt.*;
 import java.awt.event.*;
 
-public class GameChoose extends JFrame implements ActionListener{
+public class GameChoose extends JFrame{
 
-    int chose;
+    private int chose;
+    private int clicksCount =0;
 
     public GameChoose() {
         init();
@@ -24,7 +26,6 @@ public class GameChoose extends JFrame implements ActionListener{
         // Scroll bar
         JTextField textfield = new JTextField("0000");
         add(textfield);
-
         JScrollPane scrollPane =
                 new JScrollPane(
                         new JList<>(
@@ -33,29 +34,31 @@ public class GameChoose extends JFrame implements ActionListener{
                                         "6", "7",
                                         "8", "9",
                                         "10",
+
                                 }));
+
+
         scrollPane.getVerticalScrollBar().addAdjustmentListener(
                 e -> textfield.setText(String.format("%04d", e.getValue())));
-
 
         scrollPane.setBounds(100, 400, 50, 100);
         scrollPane.setVisible(true);
         p.add(scrollPane);
 
         scrollPane.addMouseListener(new MouseAdapter() {
-            // int clicksCount=0l
+            @Override
             public void mouseClicked(MouseEvent e) {
-                System.out.println("Ok");
-                if (e.getClickCount() == 1)
-                    System.out.println("Ok");
-                String s = scrollPane.getName();
-                System.out.println(s);
+                super.mouseClicked(e);
+                JList list = (JList)e.getSource();
+                System.out.println(list.getSelectedValue());
             }
         });
 
 
-        // Labels
-        JLabel labelMS = new JLabel();
+
+
+                // Labels
+                JLabel labelMS = new JLabel();
         JLabel labelHM = new JLabel();
         JLabel labelHello = new JLabel("ENTER A GAME :");
 
@@ -69,21 +72,20 @@ public class GameChoose extends JFrame implements ActionListener{
         labelMS.setBounds(100, 200, size.width, size.height);
         labelHM.setBounds(320, 180, size2.width, size2.height);
 
-        labelHello.setFont(new
+        labelHello.setFont(new  Font("Berlin Sans FB Demi", Font.BOLD, 27));
 
-                Font("Berlin Sans FB Demi", Font.BOLD, 27));
-
+        // mine sweeeper icon click event
         labelMS.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
-                MsGame ms = new MsGame(10);
+                MsGame ms = new MsGame(15);
                 ms.setVisible(true);
                 dispose();
             }
         });
-
+        // hang man icon click event
         labelHM.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
-                HmGame hg = new HmGame(Level.EASY);
+                HmGame hg = new HmGame(Level.HARD);
                 hg.setVisible(true);
                 dispose();
             }
@@ -99,12 +101,6 @@ public class GameChoose extends JFrame implements ActionListener{
     }
 
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if (e.getSource() instanceof  JScrollPane){
-            System.out.println("OK");
-        }
 
-    }
 }
 

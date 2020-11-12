@@ -69,7 +69,7 @@ public class MsGame extends JFrame implements ActionListener {
     }
 
     private void setMines() {
-        mines = 0.4 * (size * size); // setting mines number - 40% of the board
+        mines = 0.4* (size * size); // setting mines number - 40% of the board
 
         for (int i = 0; i < mines; i++) {
             int rowRand = (int) (Math.random() * size);
@@ -88,7 +88,8 @@ public class MsGame extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        count++; // check how many good selections
+
+
 
         String s = e.getActionCommand(); // getting the string of the clicked item.
         if (s.equals("New Game")) {
@@ -109,6 +110,10 @@ public class MsGame extends JFrame implements ActionListener {
                 int i = Integer.parseInt(loc[0]); // takes coordinates of the button
                 int j = Integer.parseInt(loc[1]);
 
+                if (btn.getText()==""){
+                    count++; // check how many good selections
+                }
+
                 if (mat[i][j] == true) {
                     btn.setText("*");
                     JOptionPane.showMessageDialog(null, "Game Over!");
@@ -123,6 +128,7 @@ public class MsGame extends JFrame implements ActionListener {
                         btn.setFont(new Font("Arial", Font.BOLD, 17));
                         btn.setForeground(colors[Integer.parseInt(btn.getText())]);
                     }
+
 
                 }
 
