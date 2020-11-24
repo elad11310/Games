@@ -1,12 +1,14 @@
 import javax.swing.*;
+import java.io.IOException;
 
 public class PacMan extends JFrame {
 
-    public PacMan(){
+    public PacMan() throws IOException {
         initGUI();
+
     }
 
-    private void initGUI() {
+    private void initGUI() throws IOException {
 
         add(new PacManBoard(1)); // setting the board
 
